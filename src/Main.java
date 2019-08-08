@@ -103,7 +103,7 @@ public class Main {
 				} else {
 					System.out.println("Arquivos:");
 					for (File file : files) {
-						System.out.printf("%s (%s)\n", file.getName(), file.getId());
+						System.out.printf("Nome do Arquivo: %s \n ID do Arquivo: (%s)\n\n", file.getName(), file.getId());
 					}
 				}
 				break;
