@@ -4,16 +4,20 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.FileContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.Drive.Files.Update;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,6 +25,9 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.io.*;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
 
 public class Main {
 
@@ -110,8 +117,26 @@ public class Main {
 				
 			case 2:
 				System.out.println("Opção 2 selecionada.");
+				option = 2;		
 				
-				break;
+				String nomeArquivo;
+				File fileMetadata = new File();
+				//System.out.println(" Digite o nome do arquivo a ser salvo.");
+				//nomeArquivo = sc.next();
+				//fileMetadata.setName(nomeArquivo+".txt");
+
+				
+				java.io.File filePath = new java.io.File("D:\\tabuada.txt");
+				FileContent mediaContent = new FileContent("arquivos/txt", filePath);
+				File file = service.files().create(fileMetadata, mediaContent)
+				    .setFields("id")
+				    .execute();
+				System.out.println("File ID: " + file.getId());
+				
+				
+				System.out.println("Upload Com sucesso!");
+				
+			break;
 				
 			case 3:
 				System.out.println("Opção 3 selecionada.");
