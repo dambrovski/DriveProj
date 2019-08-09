@@ -86,18 +86,19 @@ public class Main {
 
 		// Printar o nome e a ID dos primeiros 10 arquivos.
 
-		int option = 6;
+		int option = 0;
 
 
 		Scanner sc = new Scanner(System.in);
 
-		while (option == 6) {
-			System.out.println("Bem vindo ao Google Drive!");
+		while (option != 6) {
+			System.out.println("Google Drive!");
 			System.out.println(" 1 - Listar todos os Arquivos.");
 			System.out.println(" 2 - Upload de arquivo.");
 			System.out.println(" 3 - Deletar arquivo.");
 			System.out.println(" 4 - Sair.");
 			option = sc.nextInt();
+			
 			switch (option) {
 			case 1:
 				System.out.println("Opção 1 selecionada.");
@@ -112,6 +113,8 @@ public class Main {
 					for (File file : files) {
 						System.out.printf("Nome do Arquivo: %s \n ID do Arquivo: (%s)\n\n", file.getName(), file.getId());
 					}
+				
+					
 				}
 				break;
 				
@@ -121,12 +124,12 @@ public class Main {
 				
 				String nomeArquivo;
 				File fileMetadata = new File();
-				//System.out.println(" Digite o nome do arquivo a ser salvo.");
-				//nomeArquivo = sc.next();
-				//fileMetadata.setName(nomeArquivo+".txt");
-
+				System.out.println(" Digite o nome do arquivo a ser salvo.");
+				nomeArquivo = sc.next();
+				fileMetadata.setName(nomeArquivo+".txt");		
+				System.out.println("Informe o caminho do arquivo a ser feito o Upload.");
+				java.io.File filePath = new java.io.File(sc.next());
 				
-				java.io.File filePath = new java.io.File("D:\\tabuada.txt");
 				FileContent mediaContent = new FileContent("arquivos/txt", filePath);
 				File file = service.files().create(fileMetadata, mediaContent)
 				    .setFields("id")
